@@ -74,23 +74,23 @@ class BackgroundHandler extends Component {
             playing={this.state.playing}
             loop={true}
             key={this.state.key}
-            volume={1}
+            volume={0.5}
             mute={this.state.mute}
           />
         )}
-        {/* Mute button - bottom right */}
+        {/* Mute button - top right */}
         <button
           onClick={this.toggleMute}
           style={{
             position: 'fixed',
-            bottom: 60,
-            right: 80,
+            top: 30,
+            right: 40,
             zIndex: 1000,
             background: 'rgba(255,255,255,0.7)',
             border: 'black solid 1px',
             borderRadius: '50%',
-            width: 70,
-            height: 70,
+            width: 50,
+            height: 50,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
