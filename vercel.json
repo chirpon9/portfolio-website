@@ -3,6 +3,10 @@
     {
       "source": "/league",
       "destination": "https://league-mastery-searcher-production.up.railway.app"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ]
 }
