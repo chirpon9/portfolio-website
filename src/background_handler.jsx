@@ -12,10 +12,10 @@ const backgroundImages = [
   { name: 'midnight', start: 0, end: 4, src: '/backgrounds/midnight.png' }
 ];
 const audioSources = {
-  morning: '/audio/morning.mp3',
-  afternoon: '/audio/afternoon.mp3',
-  night: '/audio/night.mp3',
-  midnight: '/audio/midnight.mp3'
+  morning: '/audio/morning.ogg',
+  afternoon: '/audio/afternoon.ogg',
+  night: '/audio/night.ogg',
+  midnight: '/audio/midnight.ogg'
 };
 
 function getBackground(hour) {
@@ -41,6 +41,7 @@ class BackgroundHandler extends Component {
       key: '',
       mute: true
     };
+    this.FADE_DURATION = 2000; // ms
   }
 
   componentDidMount() {
@@ -68,6 +69,7 @@ class BackgroundHandler extends Component {
         {/* Audio player */}
         {this.state.audio_src && (
           <ReactHowler
+            ref={ref => { this.howlerRef = ref; }}
             src={this.state.audio_src}
             playing={this.state.playing}
             loop={true}
