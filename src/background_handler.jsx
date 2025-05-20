@@ -2,6 +2,8 @@
 
 import { Component } from 'react';
 import ReactHowler from 'react-howler';
+import {faVolumeHigh, faVolumeOff} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const backgroundImages = [
   { name: 'morning', start: 5, end: 11, src: '/backgrounds/morning.png' },
@@ -35,8 +37,9 @@ class BackgroundHandler extends Component {
     this.state = {
       image_src: '',
       audio_src: '',
-      playing: false,
-      key: ''
+      playing: true,
+      key: '',
+      mute: true
     };
   }
 
@@ -55,17 +58,49 @@ class BackgroundHandler extends Component {
     });
   }
 
+  toggleMute = () => {
+    this.setState((prevState) => ({ mute: !prevState.mute }));
+  }
+
   render() {
-    // Only render audio if audio_src is set
-    return this.state.audio_src ? (
-      <ReactHowler
-        src={this.state.audio_src}
-        playing={this.state.playing}
-        loop={true}
-        key={this.state.key} // force re-mount if key (background) changes
-        volume={1}
-      />
-    ) : null;
+    return (
+      <>
+        {/* Audio player */}
+        {this.state.audio_src && (
+          <ReactHowler
+            src={this.state.audio_src}
+            playing={this.state.playing}
+            loop={true}
+            key={this.state.key}
+            volume={1}
+            mute={this.state.mute}
+          />
+        )}
+        {/* Mute button - bottom right */}
+        <button
+          onClick={this.toggleMute}
+          style={{
+            position: 'fixed',
+            bottom: 60,
+            right: 80,
+            zIndex: 1000,
+            background: 'rgba(255,255,255,0.7)',
+            border: 'black solid 1px',
+            borderRadius: '50%',
+            width: 70,
+            height: 70,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+          }}
+          aria-label={this.state.mute ? 'Unmute audio' : 'Mute audio'}
+        >
+          <FontAwesomeIcon icon={this.state.mute ? faVolumeOff : faVolumeHigh} size="lg" color="black" />
+        </button>
+      </>
+    );
   }
 }
 
