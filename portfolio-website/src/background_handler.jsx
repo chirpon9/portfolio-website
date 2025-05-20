@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 // Define the correct relative path to your images
 
 const backgroundImages = [
-  { name: 'morning', start: 5, end: 11, src:'src/assets/backgrounds/morning.png' },
-  { name: 'afternoon', start: 12, end: 17, src:'src/assets/backgrounds/afternoon.png' },
-  { name: 'night', start: 18, end: 23, src:'src/assets/backgrounds/night.png' },
-  { name: 'midnight', start: 0, end: 4, src:'src/assets/backgrounds/midnight.png' }
+  { name: 'morning', start: 5, end: 11, src:'/backgrounds/morning.png' },
+  { name: 'afternoon', start: 12, end: 17, src:'/backgrounds/afternoon.png' },
+  { name: 'night', start: 18, end: 23, src:'/backgrounds/night.png' },
+  { name: 'midnight', start: 0, end: 4, src:'/backgrounds/midnight.png' }
 ];
 
 function getBackgroundImage(hour) {
@@ -21,7 +21,7 @@ function getBackgroundImage(hour) {
     }
   }
   // if error returns afternoon bc it is the default
-  return 'src/assets/backgrounds/afternoon.png';
+  return '/backgrounds/afternoon.png';
 }
 
 class BackgroundHandler extends Component {
