@@ -1,6 +1,7 @@
 import './App.css'
 import BackgroundHandler from './background_handler.jsx'
 import { useState } from 'react';
+import leagueIcon from '../public/league.webp';
 
 const dialogueInfo = {
   about: 'My name is Marco and I\'m a third year student studying information technology at Monash University! I\'m interested in web development and I play a lot of video games in my free time! I designed this website in the <br/> ' +
@@ -17,6 +18,29 @@ function App() {
   return (
     <>
       <BackgroundHandler />
+      {/* League Button + Audio Button Row */}
+      <div style={{ position: 'fixed', top: 30, right: 100, zIndex: 1001, display: 'flex', gap: 12 }}>
+        <a
+          href="https://league-mastery-searcher-production.up.railway.app/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="League Mastery Searcher"
+          style={{
+            background: 'rgba(255,255,255,0.7)',
+            border: 'black solid 1px',
+            borderRadius: '50%',
+            width: 50,
+            height: 50,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.15)'
+          }}
+        >
+          <img src={leagueIcon} alt="League" style={{ width: 32, height: 32 }} />
+        </a>
+      </div>
       <div className="textbox">
         <div className="top-section">
           <h1>melhen - メルヘン</h1>
@@ -30,7 +54,6 @@ function App() {
       </div>
       <div className="vn-textbox"
            dangerouslySetInnerHTML={{ __html: dialogueInfo[selected] }} />
-
     </>
   )
 }
