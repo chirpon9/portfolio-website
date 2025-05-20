@@ -1,48 +1,72 @@
-// handles changing of backgrounds based on time of day
+// handles changing of backgrounds and background audio based on time of day
 
-import React, { Component } from 'react';
-
-// Define the correct relative path to your images
+import { Component } from 'react';
+import ReactHowler from 'react-howler';
 
 const backgroundImages = [
-  { name: 'morning', start: 5, end: 11, src:'/backgrounds/morning.png' },
-  { name: 'afternoon', start: 12, end: 17, src:'/backgrounds/afternoon.png' },
-  { name: 'night', start: 18, end: 23, src:'/backgrounds/night.png' },
-  { name: 'midnight', start: 0, end: 4, src:'/backgrounds/midnight.png' }
+  { name: 'morning', start: 5, end: 11, src: '/backgrounds/morning.png' },
+  { name: 'afternoon', start: 12, end: 17, src: '/backgrounds/afternoon.png' },
+  { name: 'night', start: 18, end: 23, src: '/backgrounds/night.png' },
+  { name: 'midnight', start: 0, end: 4, src: '/backgrounds/midnight.png' }
 ];
+const audioSources = {
+  morning: '/audio/morning.mp3',
+  afternoon: '/audio/afternoon.mp3',
+  night: '/audio/night.mp3',
+  midnight: '/audio/midnight.mp3'
+};
 
-function getBackgroundImage(hour) {
+function getBackground(hour) {
   for (let bg of backgroundImages) {
     if (bg.start <= bg.end) {
-      if (hour >= bg.start && hour <= bg.end) return bg.src;
+      if (hour >= bg.start && hour <= bg.end) return bg;
     } else {
       // For ranges that cross midnight
-      if (hour >= bg.start || hour <= bg.end) return bg.src;
+      if (hour >= bg.start || hour <= bg.end) return bg;
     }
   }
-  // if error returns afternoon bc it is the default
-  return '/backgrounds/afternoon.png';
+  // default fallback
+  return backgroundImages[1]; // afternoon
 }
 
 class BackgroundHandler extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            image_src: ''
-        }
-    }
-    componentDidMount() {
-        const hour = new Date().getHours();
-        const image = getBackgroundImage(hour);
-        // Set background on body
-        document.body.style.backgroundImage = `url(${image})`;
-        document.body.style.backgroundSize = 'cover';
-        document.body.style.backgroundRepeat = 'no-repeat';
-        this.setState({ image_src: image });
-    }
-    render() {
-        return null
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      image_src: '',
+      audio_src: '',
+      playing: false,
+      key: ''
+    };
+  }
+
+  componentDidMount() {
+    const hour = new Date().getHours();
+    const bg = getBackground(hour);
+    document.body.style.backgroundImage = `url(${bg.src})`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundRepeat = 'no-repeat';
+    this.setState({
+      image_src: bg.src,
+      audio_src: audioSources[bg.name],
+      playing: true,
+      key: bg.name
+    });
+  }
+
+  render() {
+    // Only render audio if audio_src is set
+    return this.state.audio_src ? (
+      <ReactHowler
+        src={this.state.audio_src}
+        playing={this.state.playing}
+        loop={true}
+        key={this.state.key} // force re-mount if key (background) changes
+        volume={1}
+      />
+    ) : null;
+  }
 }
 
 export default BackgroundHandler;
