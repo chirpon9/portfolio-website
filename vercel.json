@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/league/:match*",
+      "destination": "https://league-mastery-searcher-production.up.railway.app/:match*"
+    }
+  ]
+}
