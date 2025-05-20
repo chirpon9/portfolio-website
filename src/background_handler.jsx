@@ -81,6 +81,7 @@ class BackgroundHandler extends Component {
         {/* Mute button - top right */}
         <button
           onClick={this.toggleMute}
+          className="audio-btn-fixed"
           style={{
             position: 'fixed',
             top: 30,
