@@ -8,8 +8,8 @@ const dialogueInfo = {
       'style of a visual novel! I hope you like it! Monash 大学の情報技術を専攻している3年生のマルコと申します！<br/>ゲームが大好きなので、このようなサイトを作りました。よろしくお願いいたします！',
   work: 'I focus mainly on web/app development and design! The main languages I use are: HTML/CSS, Javascript/Typescript, Python, java, php, mySQL and a little bit of C++.' +
       'As for technologies I use, I mainly use react, bun, vite, MEAN stack, LAMP stack and learning phoenix! I use figma, excalidraw and balsamiq for design.',
-  contact: 'The best way to contact me is through email! I don’t really check social media, so please email me! yuetshinglee@gmail.com. <br/> ' +
-           '連絡はメールが一番です！SNSあまりめいないので、メールをお願いします。yuetshinglee@gmail.com'
+  contact: 'The best way to contact me is through email! I don’t really check social media, so please email me! yuetshinglee@gmail.com/boringguy1234@gmail.com <br/> ' +
+           '連絡はメールが一番です！SNSあまりめいないので、メールをお願いします。yuetshinglee@gmail.com/boringguy1234@gmail.com'
 };
 
 function App() {
